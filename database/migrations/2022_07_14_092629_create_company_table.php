@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('company', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->boolean('is_claimed')->default(0);
             $table->string('token')->nullable();
             $table->string('website')->nullable();
             $table->string('phone_number')->nullable();
