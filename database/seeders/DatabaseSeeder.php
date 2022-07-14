@@ -17,9 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         Company::create([
             'name' => 'Ikea',
+            'slug' => 'ikea',
             'website' => 'ikea.com',
             'phone_number' => '+31641023222',
-            'email' => 'info@ikea.com',
+            'email_address' => 'info@ikea.com',
         ]);
     }
 }
