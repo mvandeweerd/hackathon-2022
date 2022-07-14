@@ -22,13 +22,13 @@ Route::get('/', function () {
 
 \Illuminate\Support\Facades\Auth::routes();
 
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/company/{slug}', [App\Http\Controllers\CompanyController::class, 'show'])->name('company');
+Route::get('/company/{slug}/edit', [App\Http\Controllers\CompanyController::class, 'edit'])->name('company.edit')->middleware(['auth', 'verified']);
+Route::post('/company/{slug}/edit', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update')->middleware(['auth', 'verified']);
 
-
-Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/company/{slug}/edit', [App\Http\Controllers\CompanyController::class, 'edit'])->name('company.edit');
-
-});
 ////Route::get('/register', [App\Http\Controllers\HomeController::class, 'index'])->name('company');
 //Route::get('/company/{slug}/claim', [App\Http\Controllers\CompanyController::class, 'claim'])->name('company.claim');
 
