@@ -20,3 +20,4 @@ Route::get('/', function () {
 \Illuminate\Support\Facades\Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/company/{slug}', [App\Http\Controllers\CompanyController::class, 'show'])->name('company');
