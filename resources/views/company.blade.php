@@ -16,7 +16,7 @@
 
             @if ($company['user_id'] === null)
                 <div class="ml-auto">f
-                    <a href="/company/{{ $company['id'] }}/claim/" class="bg-grey-400 rounded" data-toggle="modal" data-target="#exampleModal">Claim deze pagina</a>
+                    <a href="/register?company_id={{ $company['id'] }}" class="bg-grey-400 rounded" data-toggle="modal" data-target="#exampleModal">Claim deze pagina</a>
                 </div>
             @endif
         </div>

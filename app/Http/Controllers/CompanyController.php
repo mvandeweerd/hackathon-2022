@@ -16,14 +16,14 @@ class CompanyController extends Controller
         return view('company', compact('company'));
     }
 
-    public function claim(Request $request, $slug)
+    public function edit(Request $request, string $slug)
     {
         $company = Company::query()
             ->where('slug', $slug)
-            ->whereNull('user_id')
             ->firstOrFail();
 
-        dd($company);
+        return view('company', compact('company'));
+
     }
 
 }

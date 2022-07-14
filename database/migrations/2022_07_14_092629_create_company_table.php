@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('token')->nullable();
-            $table->string('website')->nullable();
+            $table->string('website')->nullable()->index();
             $table->string('phone_number')->nullable();
             $table->string('email_address')->nullable();
             $table->string('twitter')->nullable();

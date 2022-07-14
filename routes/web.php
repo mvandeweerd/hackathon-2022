@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +22,13 @@ Route::get('/', function () {
 
 \Illuminate\Support\Facades\Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/company/{slug}', [App\Http\Controllers\CompanyController::class, 'show'])->name('company');
+
+
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::get('/company/{slug}/edit', [App\Http\Controllers\CompanyController::class, 'edit'])->name('company.edit');
+
+});
 ////Route::get('/register', [App\Http\Controllers\HomeController::class, 'index'])->name('company');
 //Route::get('/company/{slug}/claim', [App\Http\Controllers\CompanyController::class, 'claim'])->name('company.claim');
 
@@ -32,8 +38,11 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
-    return redirect('/home');
+    $company = Company::where('user_id', $request->user()->id)->first();
+    if ($company) {
+        return redirect('/company/' . $company['slug'] . '/edit');
+    }
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 

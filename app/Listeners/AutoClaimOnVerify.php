@@ -26,7 +26,7 @@ class AutoClaimOnVerify
      */
     public function handle($event)
     {
-        $domain = explode('@', $event->user->email_address)[1];
+        $domain = explode('@', $event->user->email)[1];
 
         Company::query()
             ->where('website', $domain)
