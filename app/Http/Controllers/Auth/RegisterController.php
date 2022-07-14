@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -39,6 +40,11 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        if (request('company_id')) {
+            $company = Company::findOrFail(request('company_id'));
+
+            view()->share('company', $company);
+        }
     }
 
     /**
@@ -69,5 +75,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+//        dd($user);
     }
 }
