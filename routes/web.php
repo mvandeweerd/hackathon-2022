@@ -21,3 +21,5 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/company/{slug}', [App\Http\Controllers\CompanyController::class, 'show'])->name('company');
+Route::get('/register', [App\Http\Controllers\HomeController::class, 'index'])->name('company');
+Route::get('/company/{slug}/claim', [App\Http\Controllers\CompanyController::class, 'claim'])->name('company.claim');

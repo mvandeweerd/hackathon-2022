@@ -15,4 +15,15 @@ class CompanyController extends Controller
 
         return view('company', compact('company'));
     }
+
+    public function claim(Request $request, $slug)
+    {
+        $company = Company::query()
+            ->where('slug', $slug)
+            ->whereNull('user_id')
+            ->firstOrFail();
+
+        dd($company);
+    }
+
 }
