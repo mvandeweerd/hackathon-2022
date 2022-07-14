@@ -19,17 +19,26 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Company::create([
+            'name' => 'Bol.com',
+            'slug' => 'bol-com',
+            'website' => 'bol.com',
+            'phone_number' => '+31641023222',
+            'email_address' => 'info@bol.com',
+        ]);
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'test@example.com',
+            'password' => bcrypt('test123'),
+            'email_verified_at' => Carbon::now(),
+        ]);
+
+        Company::create([
             'name' => 'Ikea',
             'slug' => 'ikea',
             'website' => 'ikea.com',
             'phone_number' => '+31641023222',
             'email_address' => 'info@ikea.com',
-        ]);
-        User::create([
-            'name' => 'John Doe',
-            'email' => 'test@example.com',
-            'password' => bcrypt('test123'),
-            'email_verified_at' => Carbon::now(),
+            'user_id' => $user->id
         ]);
     }
 }
