@@ -13,9 +13,12 @@
                     <p>Je zocht voor: <span class="text-blue-400">[search]</span></p>
                 </div>
             </div>
-            <div class="ml-auto">f
-                <a href="/claim/1" class="bg-grey-400 rounded" data-toggle="modal" data-target="#exampleModal">Claim deze pagina</a>
-            </div>
+
+            @if ($company['user_id'] === null)
+                <div class="ml-auto">f
+                    <a href="/company/{{ $company['id'] }}/claim/" class="bg-grey-400 rounded" data-toggle="modal" data-target="#exampleModal">Claim deze pagina</a>
+                </div>
+            @endif
         </div>
         <div class="my-4">
 
