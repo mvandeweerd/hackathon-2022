@@ -24,7 +24,13 @@ class UpdateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone_number' => 'required'
+            'facebook' => 'url|nullable',
+            'twitter' => 'url|nullable',
+            'instagram' => 'url|nullable',
+            'email' => 'email|nullable',
+            'website' => 'url|nullable',
+
+//            'phone_number' => 'required'
         ];
     }
 }

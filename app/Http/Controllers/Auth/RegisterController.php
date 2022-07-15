@@ -57,8 +57,17 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'email' => ['required',
+            function ($attribute, $value, $fail) {
+                $company = Company::findOrFail(request('company_id'));
+                $host =  $company['website'];
+                $email = $value . '@'. $host;
+                if (User::whereEmail($email)->exists()) {
+                    $fail($attribute.' already exists.');
+                }
+            },
+                ]
         ]);
     }
 
@@ -70,12 +79,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $company = Company::findOrFail(request('company_id'));
+        $host =  $company['website'];
+        $email = $data['email'] . '@'. $host;
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'email' => $email,
             'password' => Hash::make($data['password']),
         ]);
-//        dd($user);
     }
 
 }

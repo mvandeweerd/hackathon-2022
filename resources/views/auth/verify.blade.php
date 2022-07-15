@@ -1,11 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+            <h2>Verifieer je e-mailadres</h2>
+            <div class="card mt-4">
+
 
                 <div class="card-body">
                     @if (session('resent'))
@@ -14,11 +15,11 @@
                         </div>
                     @endif
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
+                    {{ __('Er is een email verzonden om je pagina te claimen') }}.
+                    {{ __('Als je geen email hebt ontvangen') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('verstuur opnieuw') }}</button>.
                     </form>
                 </div>
             </div>

@@ -21,14 +21,16 @@
     <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Template Main CSS File -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
 </head>
 <body>
-    @yield('content')
+    <div class="mt-4">
+        @yield('content')
+
+    </div>
 
     <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="/assets/vendor/aos/aos.js"></script>

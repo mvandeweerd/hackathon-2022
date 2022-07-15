@@ -3,6 +3,7 @@
 use App\Models\Company;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,19 +16,34 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->back();
+});
+
+Route::get('/home', function () {
+    if (Auth::user()) {
+        $company = Company::whereUserId(Auth::user()->id)->first();
+        if ($company) {
+            return redirect()->to('/company/'.$company['slug'].'/edit');
+        }
+    }
+})->middleware(['auth', 'verified']);
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/create', [App\Http\Controllers\CompanyController::class, 'create']);
+Route::post('/create', [App\Http\Controllers\CompanyController::class, 'store']);
+
 \Illuminate\Support\Facades\Auth::routes();
 
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 Route::get('/company/{slug}', [App\Http\Controllers\CompanyController::class, 'show'])->name('company');
 Route::get('/company/{slug}/edit', [App\Http\Controllers\CompanyController::class, 'edit'])->name('company.edit')->middleware(['auth', 'verified']);
 Route::post('/company/{slug}/edit', [App\Http\Controllers\CompanyController::class, 'update'])->name('company.update')->middleware(['auth', 'verified']);
+Route::post('/email', [App\Http\Controllers\EmailController::class, 'store']);
 
 ////Route::get('/register', [App\Http\Controllers\HomeController::class, 'index'])->name('company');
 //Route::get('/company/{slug}/claim', [App\Http\Controllers\CompanyController::class, 'claim'])->name('company.claim');
